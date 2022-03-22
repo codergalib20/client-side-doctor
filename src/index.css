@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+.pagination {
+  margin-left: 10px;
+  margin-bottom: 50px;
+  padding: 10px;
+}
+.pagination button {
+  margin-left: 15px;
+  padding: 0 15px;
+}
+.pagination .selected {
+  color: white;
+  background-color: rgb(59 130 246);
+}
