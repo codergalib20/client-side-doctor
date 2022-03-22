@@ -13,14 +13,13 @@ const ServiceDetails = () => {
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
   const [servicesDetails, setServicesDetails] = useState({});
-  const [PriceforDiscount, setPriceforDiscount] = useState([]);
   const { serviceId } = useParams();
   const {
     name,
-    description,
     price,
     category,
-    code
+    code,
+    description
   } = servicesDetails;
   console.log(serviceId);
 
@@ -29,9 +28,12 @@ const ServiceDetails = () => {
     data.price = OrderPrice;
     data.serviceName = name;
     data.productCode = code;
+    data.code = code;
+    data.category = category;
+    data.status = "pending For Booking"
     // sending appointments to the database
 
-    axios.post("http://localhost:8000/appointment", data).then((res) => {
+    axios.post("https://fierce-escarpment-92507.herokuapp.com/orderedAppointments", data).then((res) => {
       if (res.data.insertedId) {
         swal({
           title: "Good job!",
@@ -44,26 +46,10 @@ const ServiceDetails = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/services/${serviceId}`).then((res) => {
+    axios.get(`https://fierce-escarpment-92507.herokuapp.com/appointment/${serviceId}`).then((res) => {
       setServicesDetails(res.data);
     });
   }, [serviceId]);
-  console.log()
-
-  useEffect(() => {
-    axios.get("http://localhost:8000/discount").then((res) => {
-      setPriceforDiscount(res.data);
-    });
-  }, []);
-
-  let setPrice = Number(price);
-  const totalP = parseInt(PriceforDiscount[0]?.total);
-  if (totalP <= setPrice) {
-    const discount = setPrice * 0.1;
-    const discountPrice = setPrice - discount;
-    setPrice = discountPrice;
-    // return price;
-  }
   return (
     <div>
       <Navbar />
@@ -87,8 +73,12 @@ const ServiceDetails = () => {
           </p>
         </div>
       </div>
-      <div className="text-center text-2xl  font-semibold text-[#0FCFE9]">
-        <p className="py-6">Wanna Book this service</p>
+      <div className="text-center font-semibold text-[#e83a3b]">
+        <p className="py-6">If you book any services first take the description</p>
+        <div className="text-justify px-3 py-6"> 
+           <h3 className="">{name}</h3>
+           <p className="text-md font-medium">{description}</p>
+        </div>
         <div className="flex justify-center w-full">
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -120,12 +110,6 @@ const ServiceDetails = () => {
               className="border mt-2 p-2 focus:outline-none focus:border-pink-400 w-full text-base"
             />
             <br />
-            {totalP && (
-              <p className=" mt-2 p-2  w-full text-sm text-left">
-                Book appointment for more than 15000 BDT and get flat 10%
-                discount
-              </p>
-            )}
             <p className=" mt-2 p-2 border w-full text-base text-left">
               Price with discount (if applicable) BDT {Number(price)}
             </p>

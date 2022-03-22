@@ -1,14 +1,11 @@
 import React from "react";
 
-const ManageAllOrderes = ({ appointment, handleDeleteUser }) => {
-  const { name, email, serviceImg, price, serviceName, _id } = appointment;
+const ManageAllOrderes = ({ appointment, handleDeleteUser,updateTestimonial }) => {
+  const { name, email, price, serviceName, _id, status } = appointment;
   return (
     <div className="px-2 rounded-md py-4 m-2 md:m-1 lg:m-2 bg-blue-200  ">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
         <div className="flex  items-center justify-start  px-2 my-2 mr-4 md:mr-0">
-          <div className=" rounded-full  flex justify-center items-center">
-            <img className="rounded-full w-24 h-24" src={serviceImg} alt="" />
-          </div>
           <div className="ml-4">
             <h2 className="text-base font-bold">{serviceName}</h2>
             <p className=" font-semibold">${price}</p>
@@ -31,6 +28,12 @@ const ManageAllOrderes = ({ appointment, handleDeleteUser }) => {
             className="bg-red-500 text-white my-1 w-full md:w-2/4 lg:w-2/4 ml-auto rounded-md py-2 text-sm px-4"
           >
             Delete
+          </button>
+          <button
+            onClick={() => updateTestimonial(_id)}
+            className="bg-red-500 text-white my-1 w-full md:w-2/4 lg:w-2/4 ml-auto rounded-md py-2 text-sm px-4"
+          >
+            {status}
           </button>
         </div>
       </div>

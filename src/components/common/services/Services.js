@@ -6,10 +6,11 @@ import Service from "./service/Service";
 const Services = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8000/services").then((data) => {
+    axios.get("https://fierce-escarpment-92507.herokuapp.com/services").then((data) => {
       setServices(data.data);
     });
   }, []);
+  console.log(services)
   return (
     <div className="my-12">
       <p className="text-center text-3xl text-[#0FCFE9] mb-12 mt-16">

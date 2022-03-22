@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 const Discount = () => {
   const [discount, setDiscount] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8000/discount").then((res) => {
+    axios.get("https://fierce-escarpment-92507.herokuapp.com/discount").then((res) => {
       setDiscount(res.data);
     });
   }, []);
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8000/discount/${id}`).then((res) => {
+    axios.delete(`https://fierce-escarpment-92507.herokuapp.com/discount/${id}`).then((res) => {
       if (res.data.deletedCount > 0) {
         alert("deleted successfully!");
         const remainingDiscount = discount.filter((disc) => disc._id !== id);

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import swal from "sweetalert";
 import ManageAllAppointments from "./ManageAllAppointments/ManageAllAppointments";
 
 const ManageOrder = () => {
@@ -7,19 +8,52 @@ const ManageOrder = () => {
 
   // DELETE
   const handleDeleteUser = (id) => {
-    axios.delete(`http://localhost:8000/appointments/${id}`).then((res) => {
-      if (res.data.deletedCount > 0) {
-        alert("deleted successfully!");
-        const remainingAppointments = allAppointments.filter(
-          (allappointment) => allappointment._id !== id
-        );
-        setAllAppointments(remainingAppointments);
+
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this ordered Appointment!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+
+        if (willDelete) {
+          axios.delete(`https://fierce-escarpment-92507.herokuapp.com/orderedAppointments/${id}`).then((res) => {
+            if (res.data.deletedCount > 0) {
+              swal("Poof! Your appointment file has been deleted!", {
+                icon: "success",
+              });
+              const remainingAppointments = allAppointments.filter(
+                (allappointment) => allappointment._id !== id
+              );
+              setAllAppointments(remainingAppointments);
+            }
+          });
+        } else {
+          swal("Appointment is safe!");
+        }
+      });
+
+  };
+  // UPDATE
+  const updateTestimonial = (id) => {
+    axios.put(`https://fierce-escarpment-92507.herokuapp.com/orderedAppointments/update/${id}`).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        swal({
+          title: "Good Job!",
+          text: "Update successfully",
+          icon: "success",
+        });
+        axios
+          .get("https://fierce-escarpment-92507.herokuapp.com/orderedAppointments")
+          .then((data) => setAllAppointments(data.data));
       }
     });
   };
 
   useEffect(() => {
-    axios.get("http://localhost:8000/allAppointments").then((res) => {
+    axios.get("https://fierce-escarpment-92507.herokuapp.com/orderedAppointments").then((res) => {
       setAllAppointments(res.data);
     });
   }, []);
@@ -36,6 +70,7 @@ const ManageOrder = () => {
             handleDeleteUser={handleDeleteUser}
             key={appointment._id}
             appointment={appointment}
+            updateTestimonial={updateTestimonial}
           ></ManageAllAppointments>
         ))}
       </div>

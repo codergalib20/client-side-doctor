@@ -7,7 +7,7 @@ const ManageTestimonials = () => {
 
   // DELETE
   const handleDeleteTestimonial = (id) => {
-    axios.delete(`http://localhost:8000/testimonials/${id}`).then((res) => {
+    axios.delete(`https://fierce-escarpment-92507.herokuapp.com/testimonials/${id}`).then((res) => {
       if (res.data.deletedCount > 0) {
         swal({
           title: "Good Job!",
@@ -23,15 +23,15 @@ const ManageTestimonials = () => {
   };
   // UPDATE
   const updateTestimonial = (id) => {
-    axios.put(`http://localhost:8000/testimonials/update/${id}`).then((res) => {
+    axios.put(`https://fierce-escarpment-92507.herokuapp.com/testimonials/update/${id}`).then((res) => {
       if (res.data.modifiedCount > 0) {
         swal({
           title: "Good Job!",
-          text: "This review is update successfully",
+          text: "Review update successfully",
           icon: "success",
         });
         axios
-          .get("http://localhost:8000/testimonials")
+          .get("https://fierce-escarpment-92507.herokuapp.com/testimonials")
           .then((data) => setTestimonials(data.data));
       }
     });
@@ -39,7 +39,7 @@ const ManageTestimonials = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/testimonials")
+      .get("https://fierce-escarpment-92507.herokuapp.com/testimonials")
       .then((data) => setTestimonials(data.data));
   }, []);
 

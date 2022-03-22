@@ -5,9 +5,9 @@ import MySingleAppointment from "./MySingleAppointment/MySingleAppointment";
 const MyAppointment = () => {
   const { user } = useAuth();
   const [userAppointments, setUserAppointments] = useState([]);
-
+   console.log(userAppointments)
   useEffect(() => {
-    fetch(`http://localhost:8000/userAppointments?email=${user.email}`)
+    fetch(`https://fierce-escarpment-92507.herokuapp.com/userAppointments?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setUserAppointments(data));
   }, [user.email]);

@@ -14,7 +14,7 @@ const Testomonials = () => {
   const [testomonials, setTestomonials] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/testimonials")
+      .get("https://fierce-escarpment-92507.herokuapp.com/testimonials")
       .then((data) => setTestomonials(data.data));
   }, []);
   console.log(testomonials)

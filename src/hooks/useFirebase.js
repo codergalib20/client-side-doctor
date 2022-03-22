@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import swal from "sweetalert";
 import initializeFirebase from "../components/authentication/Firebase/Firebase.init";
 
 // initialize fireabse
@@ -28,24 +29,23 @@ const useFirebase = () => {
 
         // sending to database
         saveUser(user.email, user.displayName, "PUT");
-
+        swal("Good Job!", "Sign in with google successfully!", "success")
         // redirect to the page
         const destination = location?.state?.from || "/";
         navigate(destination);
-        setAuthError("");
       })
       .catch((error) => {
         const errorMessage = error.message;
-        setAuthError(errorMessage);
+        swal("Oops!", `${errorMessage}`, "error")
         setUser({});
       })
       .finally(() => setLoading(false));
-  };
-
-  // register an user
-  const registerUser = (email, password, name, navigate) => {
-    setLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
+    };
+    
+    // register an user
+    const registerUser = (email, password, name, navigate) => {
+      setLoading(true);
+      createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         sendEmailVerification(auth.currentUser).then(() => {
           // Email verification sent!
@@ -53,42 +53,40 @@ const useFirebase = () => {
         alert("Email sent please verify!");
         const newUser = { email, displayName: name };
         setUser(newUser);
-
+        
         // send user to database
         saveUser(email, name, "POST");
         // after creating an user we have to send data to firebase.
         updateProfile(auth.currentUser, {
           displayName: name,
         })
-          .then(() => {})
-          .catch((error) => {});
-
-        setAuthError("");
+        .then(() => {})
+        .catch((error) => {
+          swal("Oops!", `${error.message}`, "error");
+        });
+        
+        
+        swal("Good Job!", "Sign in with Email successfully!", "success")
         navigate("/");
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        setAuthError(errorMessage);
-        setSuccess("");
+        swal("Oops!", `${error.message}`, "error");
         setUser({});
       })
       .finally(() => setLoading(false));
-  };
-
-  // login an user
-  const loginUser = (email, password, location, navigate) => {
-    setLoading(true);
-    signInWithEmailAndPassword(auth, email, password)
+    };
+    
+    // login an user
+    const loginUser = (email, password, location, navigate) => {
+      setLoading(true);
+      signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const destination = location?.state?.from || "/";
         navigate(destination);
-
-        setAuthError("");
+        swal("Good Job!", "Your login successfully!", "success")
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        setAuthError(errorMessage);
-        setSuccess("");
+        swal("Oops!", `${error.message}`, "error");
         setUser({});
       })
       .finally(() => setLoading(false));
@@ -106,7 +104,7 @@ const useFirebase = () => {
   // save user to database
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("http://localhost:8000/users", {
+    fetch("https://fierce-escarpment-92507.herokuapp.com/users", {
       method: method,
       headers: {
         "content-type": "application/json",
@@ -117,7 +115,7 @@ const useFirebase = () => {
 
   // get admin from database
   useEffect(() => {
-    axios.get(`http://localhost:8000/user/${user.email}`).then((res) => {
+    axios.get(`https://fierce-escarpment-92507.herokuapp.com/user/${user.email}`).then((res) => {
       setAdmin(res.data.admin);
     });
   }, [user.email]);

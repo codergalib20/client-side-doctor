@@ -8,7 +8,7 @@ import SingleAllService from "./SingleAllService";
 const AllServices = () => {
   const [allservices, setAllservices] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8000/allAppointments").then((res) => {
+    axios.get("https://fierce-escarpment-92507.herokuapp.com/allAppointments").then((res) => {
       setAllservices(res.data);
     });
   }, []);
@@ -21,7 +21,7 @@ const AllServices = () => {
           <div className="grid xs:grid-cols-x sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {
               allservices.map((service, index) => (
-                <SingleAllService key={index} service={service} />
+                <SingleAllService category={service.category} key={index} service={service} />
               ))
             }
           </div>

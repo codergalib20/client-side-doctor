@@ -17,9 +17,9 @@ const Feature = () => {
   return (
     <div>
       <div className="container mx-auto py-7">
-        <div className="grid xs:grid-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-3">
+        <div className="grid xs:grid-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-3">
           {features.map((feature, index) => (
-            <div key={index} className=" rounded-xl overflow-hidden hover:bg-orange-300 transition-all duration-300">
+            <div key={index} className=" rounded-xl overflow-hidden hover:bg-orange-300 transition-all duration-300 w-full">
               <div className="w-full">
                 <img className="w-full" src={feature?.img} alt={feature?.title} />
               </div>

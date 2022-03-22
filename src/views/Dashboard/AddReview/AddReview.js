@@ -8,7 +8,7 @@ const AddReview = () => {
   const onSubmit = (data) => {
     data.status = "pending";
     console.log(data);
-    axios.post("http://localhost:8000/user/testimonial", data).then((res) => {
+    axios.post("https://fierce-escarpment-92507.herokuapp.com/user/testimonial", data).then((res) => {
       if (res.data.insertedId) {
         swal({
           title: "Thanks!",

@@ -13,11 +13,11 @@ const MakeAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { email, requester };
-    axios.put("http://localhost:8000/users/admin", user).then((res) => {
+    axios.put("https://fierce-escarpment-92507.herokuapp.com/users/admin", user).then((res) => {
       if (res.data.modifiedCount > 0) {
         const email = document.getElementById("email");
         email.value = "";
-        swal("Good job!", "You clicked the button!", "success");
+        swal("Good job!", "Admin create successfully", "success");
       } else {
         swal("Oops!", "Something is wrong!", "error");
       }
