@@ -1,7 +1,7 @@
 import React from "react";
 
-const ManageAllOrderes = ({ appointment, handleDeleteUser,updateTestimonial }) => {
-  const { name, email, price, serviceName, _id, status } = appointment;
+const ManageAllOrderes = ({ appointment, handleDeleteUser, updateTestimonial }) => {
+  const { name, email, price, serviceName, _id, status, date } = appointment;
   return (
     <div className="px-2 rounded-md py-4 m-2 md:m-1 lg:m-2 bg-blue-200  ">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
@@ -9,6 +9,9 @@ const ManageAllOrderes = ({ appointment, handleDeleteUser,updateTestimonial }) =
           <div className="ml-4">
             <h2 className="text-base font-bold">{serviceName}</h2>
             <p className=" font-semibold">${price}</p>
+            {
+              date && <p className=" font-semibold">{date?.day} / {date?.month} / {date?.year}</p>
+            }
           </div>
         </div>
         <div className="flex flex-col ml-4 justify-center items-center lg:items-start md:items-start my-2 lg:my-0 md:my-0">

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import DatePicker from 'react-modern-calendar-datepicker';
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { useParams } from "react-router";
 import swal from 'sweetalert';
 import img from "../../../assets/images/medial.png";
@@ -13,6 +15,13 @@ const ServiceDetails = () => {
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
   const [servicesDetails, setServicesDetails] = useState({});
+  const [selectedDay, setSelectedDay] = useState(null);
+  <DatePicker
+    value={selectedDay}
+    onChange={setSelectedDay}
+    inputPlaceholder="Select a day"
+    shouldHighlightWeekends
+  />
   const { serviceId } = useParams();
   const {
     name,
@@ -31,6 +40,11 @@ const ServiceDetails = () => {
     data.code = code;
     data.category = category;
     data.status = "pending For Booking"
+    if (selectedDay !== null) {
+      data.date = selectedDay
+    } else {
+     return swal("Warning", "Pease select your Appointment date!", "warning")
+    }
     // sending appointments to the database
 
     axios.post("https://fierce-escarpment-92507.herokuapp.com/orderedAppointments", data).then((res) => {
@@ -75,15 +89,21 @@ const ServiceDetails = () => {
       </div>
       <div className="text-center font-semibold text-[#e83a3b]">
         <p className="py-6">If you book any services first take the description</p>
-        <div className="text-justify px-3 py-6"> 
-           <h3 className="">{name}</h3>
-           <p className="text-md font-medium">{description}</p>
+        <div className="text-justify px-3 py-6">
+          <h3 className="">{name}</h3>
+          <p className="text-md font-medium">{description}</p>
         </div>
         <div className="flex justify-center w-full">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-[100%] md:w-[80%] lg:w-[60%] mx-4 lg:mx-12"
           >
+            <DatePicker
+              value={selectedDay}
+              onChange={setSelectedDay}
+              inputPlaceholder="Select a day"
+              shouldHighlightWeekends
+            />
             <input
               required
               {...register("name")}

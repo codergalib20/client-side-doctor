@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   return (
     <>
-      <div className="bg-[#259dbb60] h-full">
+      <div className="h-full bg-sky-500">
         <div>
           {/* Mobile */}
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -171,21 +171,18 @@ const Dashboard = () => {
               <div className="grid grid-cols-1 lg:grid-cols-4  gap-y-10">
                 {/* Filters */}
                 <form
-                  style={{
-                    background: "linear-gradient(to right, #19D3B1, #0FCFE9)",
-                  }}
-                  className="hidden w-72 min-h-screen lg:block  pt-6 "
+                  className="hidden w-72 min-h-screen lg:block  pt-6 bg-yellow-900"
                 >
                   {/* large device */}
                   <Link to="/">
                     {" "}
-                    <h3 className="font-semibold text-2xl pl-4 pb-4">
-                      DOCTORS APP
+                    <h3 className="font-semibold text-yellow-50 text-2xl pl-4 pb-4">
+                      General Hospital
                     </h3>
                   </Link>
 
                   <ul className=" space-y-4  pb-6 ml-4 ">
-                    <li>
+                    <li className="text-yellow-50">
                       {" "}
                       <Link className="" to="/dashboard">
                         Dashboard
@@ -193,13 +190,13 @@ const Dashboard = () => {
                     </li>
 
                     <div className="space-y-4">
-                      <li>
+                      <li className="text-yellow-50">
                         <Link className="" to={`/dashboard/appointment`}>
                           My Appointments
                         </Link>
                       </li>
 
-                      <li>
+                      <li className="text-yellow-50">
                         <Link className="" to={`/dashboard/addreview`}>
                           Add Review
                         </Link>
@@ -208,7 +205,7 @@ const Dashboard = () => {
 
                     {admin && (
                       <div className="space-y-4">
-                        <li>
+                        <li className="text-yellow-50">
                           <Link
                             className=""
                             to={`/dashboard/manageAppointment`}
@@ -216,18 +213,18 @@ const Dashboard = () => {
                             Manage Appointments
                           </Link>
                         </li>
-                        <li>
+                        <li className="text-yellow-50">
                           <Link className="" to={`/dashboard/makeAdmin`}>
                             Make an Admin
                           </Link>
                         </li>
-                        <li>
+                        <li className="text-yellow-50">
                           <Link className="" to={`/dashboard/manageReviews`}>
                             Manage Reviews
                           </Link>
                         </li>
 
-                        <li>
+                        <li className="text-yellow-50">
                           <Link className="" to={`/dashboard/discount`}>
                             Manage Discount
                           </Link>
@@ -235,7 +232,7 @@ const Dashboard = () => {
                       </div>
                     )}
 
-                    <button onClick={logOut} className=" ">
+                    <button className="text-yellow-50" onClick={logOut} >
                       Logout
                     </button>
                   </ul>

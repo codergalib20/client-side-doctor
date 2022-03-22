@@ -22,11 +22,7 @@ const AboutInfo = () => {
         </p>
         <Link to="/services">
           <button
-            className="mx-auto bg-green-600 px-6 py-2 rounded-md"
-            style={{
-              color: "white",
-              background: "linear-gradient(to right, #19D3B1, #0FCFE9)",
-            }}
+            className=" border-2 border-yellow-900 hover:border-yellow-50 transition-all duration-500 cursor-pointer outline-none bg-yellow-50 text-yellow-900 text-sm font-bold hover:bg-yellow-900 hover:text-yellow-50 py-2 px-5"
           >
             LEARN MORE
           </button>

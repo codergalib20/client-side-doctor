@@ -13,7 +13,7 @@ const Services = () => {
   console.log(services)
   return (
     <div className="my-12">
-      <p className="text-center text-3xl text-[#0FCFE9] mb-12 mt-16">
+      <p className="text-center text-3xl text-yellow-900 mb-12 mt-16">
         sevices that we provide
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-12 md:px-16 lg:px-24 gap-y-4">
@@ -24,10 +24,7 @@ const Services = () => {
       <div className="text-center mt-6">
         <Link to="/services">
           <button
-            className="px-24 py-2 rounded-md  text-white font-semibold"
-            style={{
-              background: "linear-gradient(to right, #19D3B1, #0FCFE9)",
-            }}
+            className="px-24  border-2 border-yellow-900 hover:border-yellow-50 transition-all duration-500 cursor-pointer outline-none bg-yellow-50 text-yellow-900 text-sm font-bold hover:bg-yellow-900 hover:text-yellow-50 py-2"
           >
             all serivces
           </button>

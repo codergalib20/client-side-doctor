@@ -27,10 +27,7 @@ const SomeInfo = () => {
         </p>
         <div className="text-center md:text-left lg:text-left">
           <button
-            className="uppercase py-3 px-6 font-semibold text-white rounded-lg mt-8 ml-4 md:ml-0 lg:ml-0"
-            style={{
-              background: "linear-gradient(to right, #19D3B1, #0FCFE9)",
-            }}
+            className="mt-4 border-2 border-yellow-900 hover:border-yellow-50 transition-all duration-500 cursor-pointer outline-none bg-yellow-50 text-yellow-900 text-sm font-bold hover:bg-yellow-900 hover:text-yellow-50 py-2 px-5"
           >
             LEARN MORE
           </button>

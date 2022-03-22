@@ -6,7 +6,7 @@ const SingleTestomonial = ({ testomonial }) => {
   return (
     <>
       {status === "approved" && (
-        <div className="py-4 ">
+        <div className="py-4 rounded-lg">
           <div className="flex pl-6 py-8 ">
             <div className="">
               <img className="w-16 h-16 rounded-full" src={img} alt="" />
@@ -16,7 +16,7 @@ const SingleTestomonial = ({ testomonial }) => {
               <p className="text-sm">{degisnation}</p>
               <Rating
                 readonly
-                className="text-yellow-400  pb-2 "
+                className="text-yellow-900  pb-2 "
                 initialRating={rating}
                 emptySymbol="far fa-star "
                 fullSymbol="fas fa-star "
